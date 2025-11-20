@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:amethyst_shard",
+    "C": "minecraft:coal",
+    "B": "minecraft:bone_meal",
+    "G": "minecraft:gunpowder"
+  },
+  "pattern": [
+    " # ",
+    "#C#",
+    "BGB"
+  ],
+  "result": {
+    "count": 4,
+    "id": "experiment-three:suspicious_substance"
+  }
+}

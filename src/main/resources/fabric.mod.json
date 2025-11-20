@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "experiment-three",
+	"version": "${version}",
+	"name": "Experiment-Three",
+	"description": "Experimental Minecraft Mod - Take Three",
+	"authors": [
+		"Timituna"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/experiment-three/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.tuna.experiment_three.ExperimentThree"
+		],
+		"client": [
+			"net.tuna.experiment_three.ExperimentThreeClient"
+		],
+		"fabric-datagen": [
+			"net.tuna.experiment_three.ExperimentThreeDataGenerator"
+		]
+	},
+	"mixins": [
+		"experiment-three.mixins.json",
+		{
+			"config": "experiment-three.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.1",
+		"minecraft": "~1.21.10",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
