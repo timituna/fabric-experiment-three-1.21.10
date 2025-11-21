@@ -7,7 +7,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -28,9 +27,9 @@ public class ModItems {
         FuelRegistryEvents.BUILD.register((builder, context) -> {
             builder.add(ModItems.SUSPICIOUS_SUBSTANCE, 135 * 20);
         });
-    };
+    }
 
-    private static List<MobEffectInstance> suspicious_substance_effects = List.of(new MobEffectInstance(MobEffects.POISON, 10 * 20, 1),
+    private static final List<MobEffectInstance> suspicious_substance_effects = List.of(new MobEffectInstance(MobEffects.POISON, 10 * 20, 1),
             new MobEffectInstance(MobEffects.BLINDNESS, 5 * 20));
 
     public static final Consumable POISON_FOOD_CONSUMABLE_COMPONENT = Consumables.defaultFood()
