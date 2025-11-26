@@ -1,10 +1,12 @@
 package net.tuna.experiment_three.items;
 
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -12,9 +14,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
@@ -26,7 +26,7 @@ import java.util.function.Function;
 
 public class ModItems {
     public static void init() {
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS)
+        /*ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS)
                 .register((itemGroup) -> itemGroup.accept(ModItems.SUSPICIOUS_SUBSTANCE));
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
                 .register((itemGroup) -> itemGroup.accept(ModItems.GUIDITE_SWORD));
@@ -37,17 +37,37 @@ public class ModItems {
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT)
                 .register((itemGroup) -> itemGroup.accept(ModItems.GUIDITE_LEGGINGS));
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT)
-                .register((itemGroup) -> itemGroup.accept(ModItems.GUIDITE_CHESTPLATE));
+                .register((itemGroup) -> itemGroup.accept(ModItems.GUIDITE_CHESTPLATE));*/
         FuelRegistryEvents.BUILD.register((builder, context) -> {
             builder.add(ModItems.SUSPICIOUS_SUBSTANCE, 135 * 20);
-        }
-        );
+            });
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, CUSTOM_ITEM_GROUP_KEY, CUSTOM_ITEM_GROUP);
+
+        ItemGroupEvents.modifyEntriesEvent(CUSTOM_ITEM_GROUP_KEY).register((itemGroup) -> {
+            itemGroup.accept(ModItems.SUSPICIOUS_SUBSTANCE);
+            itemGroup.accept(ModItems.GUIDITE_SWORD);
+            itemGroup.accept(ModItems.GUIDITE_HELMET);
+            itemGroup.accept(ModItems.GUIDITE_BOOTS);
+            itemGroup.accept(ModItems.GUIDITE_LEGGINGS);
+            itemGroup.accept(ModItems.GUIDITE_CHESTPLATE);
+        });
     }
 
     /*public static final TagKey<Item> REPAIRS_GUIDITE_ARMOR = TagKey.create(
             BuiltInRegistries.ITEM.key(),
             ResourceLocation.fromNamespaceAndPath(ExperimentThree.MOD_ID, "repairs_guidite_armor")
     );*/
+
+
+    public static final ResourceKey<CreativeModeTab> CUSTOM_ITEM_GROUP_KEY = ResourceKey.create(
+            BuiltInRegistries.CREATIVE_MODE_TAB.key(),
+            ResourceLocation.fromNamespaceAndPath(ExperimentThree.MOD_ID, "item_group")
+    );
+
+    public static final CreativeModeTab CUSTOM_ITEM_GROUP = FabricItemGroup.builder()
+            .icon(() -> new ItemStack(ModItems.GUIDITE_SWORD))
+            .title(Component.translatable("itemGroup.experiment-three"))
+            .build();
 
     public static final ToolMaterial GUIDITE_TOOL_MATERIAL = new ToolMaterial(
             BlockTags.INCORRECT_FOR_WOODEN_TOOL,

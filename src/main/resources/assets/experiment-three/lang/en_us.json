@@ -4,5 +4,6 @@
   "item.experiment-three.guidite_helmet": "Guidite Helmet",
   "item.experiment-three.guidite_chestplate": "Guidite Chestplate",
   "item.experiment-three.guidite_leggings": "Guidite Leggings",
-  "item.experiment-three.guidite_boots": "Guidite Boots"
+  "item.experiment-three.guidite_boots": "Guidite Boots",
+  "itemGroup.experiment-three": "Custom Items"
 }
