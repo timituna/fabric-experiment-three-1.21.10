@@ -26,18 +26,6 @@ import java.util.function.Function;
 
 public class ModItems {
     public static void init() {
-        /*ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS)
-                .register((itemGroup) -> itemGroup.accept(ModItems.SUSPICIOUS_SUBSTANCE));
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
-                .register((itemGroup) -> itemGroup.accept(ModItems.GUIDITE_SWORD));
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT)
-                        .register((itemGroup) -> itemGroup.accept(ModItems.GUIDITE_HELMET));
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT)
-                .register((itemGroup) -> itemGroup.accept(ModItems.GUIDITE_BOOTS));
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT)
-                .register((itemGroup) -> itemGroup.accept(ModItems.GUIDITE_LEGGINGS));
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT)
-                .register((itemGroup) -> itemGroup.accept(ModItems.GUIDITE_CHESTPLATE));*/
         FuelRegistryEvents.BUILD.register((builder, context) -> {
             builder.add(ModItems.SUSPICIOUS_SUBSTANCE, 135 * 20);
             });
@@ -50,6 +38,7 @@ public class ModItems {
             itemGroup.accept(ModItems.GUIDITE_BOOTS);
             itemGroup.accept(ModItems.GUIDITE_LEGGINGS);
             itemGroup.accept(ModItems.GUIDITE_CHESTPLATE);
+            itemGroup.accept(ModItems.LIGHTNING_STICK);
         });
     }
 
@@ -78,12 +67,6 @@ public class ModItems {
             GuiditeArmorMaterial.REPAIRS_GUIDITE_ARMOR
     );
 
-    public static final Item GUIDITE_SWORD = registerItem(
-            "guidite_sword",
-            Item::new,
-            new Item.Properties().sword(GUIDITE_TOOL_MATERIAL, 1f,1f)
-    );
-
     private static final List<MobEffectInstance> suspicious_substance_effects = List.of(new MobEffectInstance(MobEffects.POISON, 10 * 20, 1),
             new MobEffectInstance(MobEffects.BLINDNESS, 5 * 20));
 
@@ -98,6 +81,12 @@ public class ModItems {
 
     public static final Item SUSPICIOUS_SUBSTANCE = registerItem("suspicious_substance", Item::new,
             new Item.Properties().food(POISON_FOOD_COMPONENT, POISON_FOOD_CONSUMABLE_COMPONENT));
+
+    public static final Item GUIDITE_SWORD = registerItem(
+            "guidite_sword",
+            Item::new,
+            new Item.Properties().sword(GUIDITE_TOOL_MATERIAL, 1f,1f)
+    );
 
     public static final Item GUIDITE_HELMET = registerItem(
             "guidite_helmet",
@@ -123,6 +112,12 @@ public class ModItems {
             Item::new,
             new Item.Properties().humanoidArmor(GuiditeArmorMaterial.INSTANCE, ArmorType.BOOTS)
                     .durability(ArmorType.BOOTS.getDurability(GuiditeArmorMaterial.BASE_DURABILITY))
+    );
+
+    public static final Item LIGHTNING_STICK = registerItem(
+            "lightning_stick",
+            LightningStick::new,
+            new LightningStick.Properties()
     );
 
     public static Item registerItem(
