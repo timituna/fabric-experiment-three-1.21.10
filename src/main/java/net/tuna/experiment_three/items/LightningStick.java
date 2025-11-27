@@ -1,8 +1,6 @@
 package net.tuna.experiment_three.items;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -11,16 +9,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
+import java.util.Random;
 
 
 public class LightningStick extends Item {
+    private final Random rand;
+    private final int boundX = 5; //sets the lightning bolt spread
+    private final int boundY = 5; //spread = (boundX - 1) * (boundY - 1)
+
     public LightningStick(Properties properties) {
         super(properties);
-    }
-
-    private Vec3i getSurfaceBlock(Level world, int x, int z) {
-        int surfaceY = world.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
-        return new Vec3i(x, surfaceY, z);
+        rand = new Random();
     }
 
     @Override
@@ -29,7 +28,9 @@ public class LightningStick extends Item {
         if(world.isClientSide())
             return InteractionResult.PASS;
 
-        BlockPos frontOfPlayer = user.blockPosition().relative(user.getDirection(), 10);
+        int randomFactorX = rand.nextInt(0, boundX);
+        int randomFactorZ = rand.nextInt(0, boundY);
+        BlockPos frontOfPlayer = user.blockPosition().relative(user.getDirection(), 10).offset(randomFactorX, 0, randomFactorZ);
         int surfaceY = world.getHeight(Heightmap.Types.WORLD_SURFACE, frontOfPlayer.getX(), frontOfPlayer.getZ());
         BlockPos ground = frontOfPlayer.atY(surfaceY);
         LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, world);
