@@ -14,8 +14,8 @@ import java.util.Random;
 
 public class LightningStick extends Item {
     private final Random rand;
-    private final int boundX = 5; //sets the lightning bolt spread
-    private final int boundY = 5; //spread = (boundX - 1) * (boundY - 1)
+    private final int boundX = 2; //sets the lightning bolt spread
+    private final int boundY = 2; //spread = (boundX - 1) * (boundY - 1)
 
     public LightningStick(Properties properties) {
         super(properties);
