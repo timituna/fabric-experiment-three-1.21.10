@@ -14,6 +14,9 @@ public class ModEnchantmentEffects {
     public static final ResourceKey<Enchantment> THUNDERING = of("thundering");
     public static final MapCodec<LightningEnchantmentEffect> LIGHTNING_EFFECT = register("lightning_effect", LightningEnchantmentEffect.CODEC);
 
+    public static final ResourceKey<Enchantment> HEMORRHAGE = of("hemorrhage");
+    public static final MapCodec<HemorrhageEnchantmentEffect> HEMORRHAGE_EFFECT = register("hemorrhage_effect", HemorrhageEnchantmentEffect.CODEC);
+
     private static <T extends EnchantmentEntityEffect> MapCodec<T> register(String id, MapCodec<T> codec) {
         return Registry.register(
                 BuiltInRegistries.ENCHANTMENT_ENTITY_EFFECT_TYPE,

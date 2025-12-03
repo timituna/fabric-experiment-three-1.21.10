@@ -40,6 +40,23 @@ public class ExperimentThreeEnchantmentGenerator extends FabricDynamicRegistryPr
                 new LightningEnchantmentEffect(LevelBasedValue.perLevel(0.4f, 0.2f))
             )
         );
+        register(entries, ModEnchantmentEffects.HEMORRHAGE, Enchantment.enchantment(
+                Enchantment.definition(
+                        registries.lookupOrThrow(Registries.ITEM).getOrThrow(ItemTags.WEAPON_ENCHANTABLE),
+                        25,
+                        1,
+                        Enchantment.dynamicCost(1, 0),
+                        Enchantment.dynamicCost(1, 0),
+                        3,
+                        EquipmentSlotGroup.HAND
+                )
+            ).withEffect(
+                EnchantmentEffectComponents.POST_ATTACK,
+                EnchantmentTarget.ATTACKER,
+                EnchantmentTarget.VICTIM,
+                new HemorrhageEnchantmentEffect(LevelBasedValue.perLevel(0.4f, 0.2f))
+            )
+        );
     }
 
     private void register(Entries entries, ResourceKey<Enchantment> key, Enchantment.Builder builder, ResourceCondition... resourceConditions) {
